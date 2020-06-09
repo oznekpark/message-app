@@ -11,10 +11,10 @@
           = link_to edit_user_path(current_user), class: "chat-side__side-header__box__menu__new-group__link" do
             = icon("fas", "cog")
   .chat-side__groups
-    -# - current_user.groups.each do |group|
-    -#   = link_to group_messages_path(group), class:"chat-side__groups__group" do
-    -#     .chat-side__groups__group__list
-    -#       .chat-side__groups__group__list__name
-    -#         = group.name
-    -#       .chat-side__groups__group__list__news
-    -#         = group.show_last_message
+    - current_user.groups.each do |group|
+      = link_to group_messages_path(group), class:"chat-side__groups__group" do
+        .chat-side__groups__group__list
+          .chat-side__groups__group__list__name
+            = group.name
+          .chat-side__groups__group__list__news
+            -# = group.show_last_message
