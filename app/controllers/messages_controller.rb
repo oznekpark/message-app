@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
   def index
     @message = Message.new
     @messages = @group.messages.includes(:user)
+    @latestMessage = @group.messages.order(updated_at: :desc).limit(1)
   end
 
   def create
