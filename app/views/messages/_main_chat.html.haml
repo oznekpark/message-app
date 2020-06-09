@@ -10,9 +10,10 @@
             = user.name
     = link_to "Edit", edit_group_path(@group), class: "chat-main__main-header__edit-btn"
   .chat-main__messages
-    -# = render @messages
+    = render @messages
+    -# = render partial: "message", collection: @messages
   .chat-main__form
-    = form_for "#" do |f|
+    = form_for [@group, @message] do |f|
       .chat-main__form__form-parents
         .chat-main__form__form-parents__input-box
           = f.text_field :text, class: "chat-main__form__form-parents__input-box__sending-content", placeholder: "type a message"
