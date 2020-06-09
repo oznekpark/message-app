@@ -1,0 +1,22 @@
+.chat-main
+  .chat-main__main-header
+    .chat-main__main-header__top  
+      .chat-main__main-header__top__group-name
+        -# = @group.name
+      %ul.chat-main__main-header__top__member-list
+        Member：
+        %li.chat-main__main-header__top__member-list__first
+          -# - @group.users.each do |user|
+          -#   = user.name
+    = link_to "Edit", "#", class: "chat-main__main-header__edit-btn"
+  .chat-main__messages
+    -# = render @messages
+  .chat-main__form
+    = form_for "#" do |f|
+      .chat-main__form__form-parents
+        .chat-main__form__form-parents__input-box
+          = f.text_field :text, class: "chat-main__form__form-parents__input-box__sending-content", placeholder: "type a message"
+          = f.label :image, class: "chat-main__form__form-parents__input-box__put-pic" do
+            = icon("fas", "image")
+            = f.file_field :image, class: "chat-main__form__form-parents__input-box__put-pic__none"
+        = f.submit "Send", class: "chat-main__form__form-parents__send-btn"
