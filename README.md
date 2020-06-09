@@ -22,8 +22,8 @@
 ## group_usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false, foreign_key: true|
-|group|references|null: false, foreign_key: true|
+|user|references|foreign_key: true|
+|group|references|foreign_key: true|
 ### Association
 - belongs_to :group
 - belongs_to :user
@@ -31,10 +31,10 @@
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|text|text||
-|image|text||
-|user|references|null: false, foreign_key: true|
-|group|references|null: false, foreign_key: true|
+|text|string||
+|image|string||
+|user|references|foreign_key: true|
+|group|references|foreign_key: true|
 ### Association
 - belongs_to :user
 - belongs_to :group
