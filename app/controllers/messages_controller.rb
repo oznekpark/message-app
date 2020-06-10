@@ -11,8 +11,12 @@ class MessagesController < ApplicationController
     # @message = Message.new(message_params)は送信できない
     @message = @group.messages.new(message_params)
     if @message.save
-      redirect_to group_messages_path(@group)
+      respond_to do |format|
+        format.html {redirect_to group_messages_path(@group)}
+        format.json
+      end
     else
+      @messages = @group.messages.includes(:user)
       flash.now[:alert] = 'メッセージを入力してください。'
       render :index
     end
