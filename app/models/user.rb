@@ -9,4 +9,10 @@ class User < ApplicationRecord
   has_many :messages
   
   validates :name, :email, :encrypted_password, presence: true
+
+  def self.search(input, id)
+    return nil if input == ""
+    User.where('name LIKE ?', "%#{input}%").where.not(id: id).limit(10)
+    # 入力された値inputを含むかつ、ログインしているユーザーのidは除外するという条件
+  end
 end
