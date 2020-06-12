@@ -39,4 +39,8 @@ $(function(){
       alert("ユーザー検索に失敗しました");
     });
   });
+
+  $("#user-search-result").on("click", ".user-search-add",function(){
+    console.log(this);
+  });
 });
