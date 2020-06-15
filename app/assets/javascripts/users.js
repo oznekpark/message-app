@@ -59,4 +59,7 @@ $(function(){
     var html = addUser(userName, userId);
     $(".js-add-user").append(html);
   });
+  $(".js-add-user").on("click", ".chat-group-user__btn--remove", function(){
+    $(".chat-group-user__btn--remove").parent().remove();
+  });
 });
