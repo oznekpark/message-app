@@ -25,7 +25,10 @@ $(function(){
                 `
     return html
   }
-  
+  function addMember(userId){
+    let html = `<input value="${userId}" name="group[user_ids][]" type="hidden" id="group_user_ids_${userId}" />`;
+    $(`#${userId}`).append(html);
+  }
   $("#user-search-field").on("keyup", function(){
     var input = $("#user-search-field").val();
     $.ajax({
@@ -51,15 +54,19 @@ $(function(){
     });
   });
 
-  $("#user-search-result").on("click", ".user-search-add",function(){
+  $(document).on("click", ".user-search-add",function(){
     // $(".chat-group-user").remove();
     const userId = $(".user-search-add").attr("data-user-id");
     const userName = $(".user-search-add").attr("data-user-name");
     $(".user-search-add").parent().remove();
     var html = addUser(userName, userId);
     $(".js-add-user").append(html);
+    addMember(userId);
   });
-  $(".js-add-user").on("click", ".chat-group-user__btn--remove", function(){
+  $(document).on("click", ".chat-group-user__btn--remove", function(){
     $(".chat-group-user__btn--remove").parent().remove();
   });
 });
+
+// $(document).onすることで常に最新のHTMLの情報を取得することができます。
+// 今回だとappendさせて作成したHTMLから最新情報を取得する際に使用
