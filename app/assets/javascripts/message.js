@@ -53,7 +53,6 @@ $(function(){
     })
     .done(function(message){
       var html = buildHTML(message);
-      console.log(message);
       $(".chat-main__messages").append(html);
       $("#new_message")[0].reset();
       // $("#message_text").val("");でもOKだけど$("#message_image").val("");の二つ書く必要があるから一度に消せるresetの方が楽
@@ -66,4 +65,29 @@ $(function(){
       $(".chat-main__form__form-parents__send-btn").prop("disabled", false);
     })
   });
+  var reloadMessages = function(){
+    var last_message_id = $('.chat-main__messages__message:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: "get",
+      data: {id: last_message_id},
+      dataType: "json"
+    })
+    .done(function(messages){
+      if(messages.length !== 0){
+        var insertHTML = "";
+      $.each(messages, function(i, message){
+        insertHTML = insertHTML + buildHTML(message)
+      })
+      $('.chat-main__messages').append(insertHTML);
+      $('.chat-main__messages').animate({scrollTop: $('.chat-main__messages')[0].scrollHeight});
+      }
+    })
+    .fail(function(){
+      alert("error");
+    })
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)){
+    setInterval(reloadMessages, 6000);
+  }
 });
