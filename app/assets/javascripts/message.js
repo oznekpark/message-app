@@ -65,29 +65,31 @@ $(function(){
       $(".chat-main__form__form-parents__send-btn").prop("disabled", false);
     })
   });
+  // 自動更新
   var reloadMessages = function(){
     var last_message_id = $('.chat-main__messages__message:last').data("message-id");
     $.ajax({
       url: "api/messages",
       type: "get",
-      data: {id: last_message_id},
-      dataType: "json"
+      dataType: "json",
+      data: {id: last_message_id}
     })
     .done(function(messages){
-      if(messages.length !== 0){
+      console.log(messages);
+      if (messages.length !== 0){
         var insertHTML = "";
-      $.each(messages, function(i, message){
-        insertHTML = insertHTML + buildHTML(message)
-      })
-      $('.chat-main__messages').append(insertHTML);
-      $('.chat-main__messages').animate({scrollTop: $('.chat-main__messages')[0].scrollHeight});
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.chat-main__messages').append(insertHTML);
+        $('.chat-main__messages').animate({ scrollTop: $('.chat-main__messages')[0].scrollHeight});
       }
     })
     .fail(function(){
       alert("error");
-    })
-  };
-  if (document.location.href.match(/\/groups\/\d+\/messages/)){
-    setInterval(reloadMessages, 6000);
+    });
+  }
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
   }
 });
