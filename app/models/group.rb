@@ -12,7 +12,7 @@ class Group < ApplicationRecord
         "画像が投稿されています"
       end
     else
-      "まだ投稿がありません"
+      "ありません"
     end
   end
 
